@@ -1,0 +1,16 @@
+a{
+	text-decoration:none;
+	color:blue;
+}
+.yaka_logo{
+	width:100px;
+}
+.logo{	
+	overflow:hidden;
+}
+.logo h2{	
+	float:left;
+}
+li{
+	list-style-type: none;
+}

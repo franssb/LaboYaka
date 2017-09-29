@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+	version="2.0">
+	
+	<access>FIELD</access> <!-- utilisation ou des setters (PROPERTY) des classes des entités -->
+	
+	
+	<named-query name="getAllCategories">
+		<query>select c from Categories as c</query>	<!-- nom donné a l'entité -->
+	</named-query>
+	
+ 	<named-query name="getAllSousCategoriesByCategories">
+		<query>select s from SousCategories as s where s.categorie = :cat</query>	
+	</named-query>
+	
+ 	<named-query name="getAllProduitsBySousCategories">
+		<query>select p from Produits as p where p.sousCategories = :scat</query>	
+	</named-query>
+	
+ 	<named-query name="getProduitById">
+		<query>select p from Produits as p where p.id = :id</query>	
+	</named-query>
+	<named-query name="getArticleByCaracteristiquesAndProduit">
+		<query>
+		select a from Articles as a where a.caracteristiques.produits.id = :prod_id <!-- and  car_valeur in :car_id -->
+		</query>
+	</named-query>
+	
+ 	<!-- <named-query name="getProprieteByProduitId">
+		<query>
+		select p from Proprietes as p 
+		join caracteristiques on prop_id=car_fk_proprietes 
+		join produits on prop_id = car_fk_produits
+		where produits.id = :id
+		</query>	
+	</named-query> -->
+	
+	<entity class="be.steformations.fs.yaka.jpa.beans.CategoriesImpl" name="Categories">
+		<table name="categories"/>
+		<attributes>
+			<id name="id"><column name="cat_id"/><generated-value strategy="IDENTITY"/></id>
+			<basic name="nom"><column name="cat_nom"/></basic>
+		</attributes>	
+	</entity>
+	
+	<entity class="be.steformations.fs.yaka.jpa.beans.SousCategoriesImpl" name="SousCategories">
+		<table name="sous_categories"/>
+		<attributes>
+			<id name="id"><column name="sscat_id"/><generated-value strategy="IDENTITY"/></id>
+			<basic name="nom"><column name="sscat_nom"/></basic>
+			<basic name="categorie"><column name="sscat_fk_categories"/></basic>
+		</attributes>	
+	</entity>
+	
+ 	<entity class="be.steformations.fs.yaka.jpa.beans.ProduitsImpl" name="Produits">
+		<table name="produits"/>
+		<attributes>
+			<id name="id"><column name="prod_id"/><generated-value strategy="IDENTITY"/></id>
+			<basic name="nom"><column name="prod_nom"/></basic>
+			<basic name="vignette"><column name="prod_vignette"/></basic>
+			<basic name="image"><column name="prod_image"/></basic>
+			<basic name="descrCourte"><column name="prod_descr_courte"/></basic>
+			<basic name="descrLongue"><column name="prod_descr_longue"/></basic>
+			<basic name="sousCategories"><column name="prod_fk_sous_categories"/></basic>
+			<one-to-many name="caracteristiques" mapped-by="produits"></one-to-many>
+			<transient name="caracByProp"/>
+		</attributes>	
+	</entity>
+	
+ 	<entity class="be.steformations.fs.yaka.jpa.beans.CaracteristiquesImpl" name="Caracteristiques">
+		<table name="caracteristiques"/>
+		<attributes>
+			<id name="id"><column name="car_id"/><generated-value strategy="IDENTITY"/></id>
+			<basic name="valeur"><column name="car_valeur"/></basic>
+			<many-to-one name="produits" target-entity="be.steformations.fs.yaka.jpa.beans.ProduitsImpl">
+				<join-column name="car_fk_produits"/>
+			</many-to-one>
+			<many-to-one name="proprietes" target-entity="be.steformations.fs.yaka.jpa.beans.ProprietesImpl">
+				<join-column name="car_fk_proprietes"/>
+			</many-to-one>
+			<many-to-many name="articles" mapped-by="caracteristiques" />
+		</attributes>	
+	</entity>
+	
+ 	<entity class="be.steformations.fs.yaka.jpa.beans.ProprietesImpl" name="Proprietes">
+		<table name="proprietes"/>
+		<attributes>
+			<id name="id"><column name="prop_id"/><generated-value strategy="IDENTITY"/></id>
+			<basic name="nom"><column name="prop_nom"/></basic>
+		</attributes>	
+	</entity>
+	
+ 	<entity class="be.steformations.fs.yaka.jpa.beans.ArticlesImpl" name="Articles">
+		<table name="prix"/>
+		<attributes>
+			<id name="id"><column name="pri_id"/><generated-value strategy="IDENTITY"/></id>
+			<basic name="prixHtva"><column name="pri_htva"/></basic>
+			<basic name="poids"><column name="pri_poids"/></basic>
+			<basic name="vol_conditionnement"><column name="pri_vol_conditionnnement"/></basic>
+			<many-to-many name="caracteristiques">
+				<join-table name="combinaisons">
+					<join-column name="com_fk_prix"/>
+					<inverse-join-column name="com_fk_caracteristiques"/>
+				</join-table>
+			</many-to-many>
+		</attributes>	
+	</entity>
+	
+</entity-mappings>
