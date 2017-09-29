@@ -28,6 +28,11 @@ public class DetailProduitControler {
 	@RequestMapping("detailProduit")
 	public String showProduitDetail( 
 			@RequestParam("prod") String prod,
+			/*
+			 * @RequestParam("") String ,
+			 */
+			
+			
 			Map<String, Object> attributs
 			){	
 		int idProduit = -1;
@@ -38,6 +43,13 @@ public class DetailProduitControler {
 		}
 		ProduitsImpl produit = gestionnaire.getProduitById(idProduit);
 		attributs.put("produit", produit);
+		
+		for (CaracByProprietes car : produit.getCaracByProp()) {
+			for (CaracteristiquesImpl c : car.getCaracteristiques()) {
+				//if(c.getArticles )
+				System.out.println(c.getArticles());
+			}
+		}
 		
 		//for each produit.getcarac -> get prop name
 		/*List<ProprietesImpl> propList = gestionnaire.getProprieteByProduitId(idProduit);

@@ -22,11 +22,7 @@
  	<named-query name="getProduitById">
 		<query>select p from Produits as p where p.id = :id</query>	
 	</named-query>
-	<named-query name="getArticleByCaracteristiquesAndProduit">
-		<query>
-		select a from Articles as a where a.caracteristiques.produits.id = :prod_id <!-- and  car_valeur in :car_id -->
-		</query>
-	</named-query>
+
 	
  	<!-- <named-query name="getProprieteByProduitId">
 		<query>

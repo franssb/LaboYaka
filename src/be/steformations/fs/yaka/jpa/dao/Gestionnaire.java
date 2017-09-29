@@ -47,10 +47,7 @@ public class Gestionnaire {
 //		return this.em.createNamedQuery("getCaracteristiquesByProduitId", CaracteristiquesImpl.class).setParameter("id", id).getResultList();
 //	}
 	
-	public ArticlesImpl getArticleByCaracteristiquesAndProduit(List<Integer> car_id, int prod_id){
-		this.em.createNamedQuery("getArticleByCaracteristiquesAndProduit", ArticlesImpl.class).setParameter("prod_id", prod_id).setParameter("car_id", car_id);
-		return null;
-	}
+
 	
 	
 

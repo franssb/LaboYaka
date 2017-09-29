@@ -9,8 +9,8 @@ public class ArticlesImpl {
 	protected int prixHtva;
 	protected int poids;
 	protected int vol_conditionnement;
-	//protected ProduitsImpl produit;	//inutle?
 	protected List<CaracteristiquesImpl> caracteristiques;
+	
 	public int getId() {
 		return id;
 	}
