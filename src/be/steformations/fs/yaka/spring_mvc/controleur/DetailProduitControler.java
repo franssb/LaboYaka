@@ -1,7 +1,5 @@
 package be.steformations.fs.yaka.spring_mvc.controleur;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import be.steformations.fs.yaka.jpa.beans.ArticlesImpl;
 import be.steformations.fs.yaka.jpa.beans.CaracByProprietes;
 import be.steformations.fs.yaka.jpa.beans.CaracteristiquesImpl;
 import be.steformations.fs.yaka.jpa.beans.ProduitsImpl;
-import be.steformations.fs.yaka.jpa.beans.ProprietesImpl;
 import be.steformations.fs.yaka.jpa.dao.Gestionnaire;
 
 @Controller
@@ -47,7 +45,14 @@ public class DetailProduitControler {
 		for (CaracByProprietes car : produit.getCaracByProp()) {
 			for (CaracteristiquesImpl c : car.getCaracteristiques()) {
 				//if(c.getArticles )
-				System.out.println(c.getArticles());
+				System.out.println("DetailProduitControler.showProduitDetail()");
+				System.out.println(c.getId());
+				
+				for (ArticlesImpl	a : c.getArticles()) {
+					System.out.println("a.id");
+					System.out.println(a.getId());
+					
+				}
 			}
 		}
 		

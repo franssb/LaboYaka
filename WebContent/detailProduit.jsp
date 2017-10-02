@@ -23,9 +23,9 @@
 			<c:forEach var="prop" items="${p.caracByProp}">
 				<label><c:out value="${prop.proprietes.nom}"/></label>
 				<c:if test="${prop.proprietes.id != 2}">
-					<select name="${prop.proprietes.nom}">
+					<select name="param">
 						<c:forEach var="v" items="${prop.caracteristiques}">
-							<option value="${v.id}"><c:out value="${v.valeur}"/></option>					
+							<option  value="${v.id}"><c:out value="${v.valeur}"/></option>					
 						</c:forEach>
 					</select>
 				</c:if>

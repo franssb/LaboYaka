@@ -22,7 +22,14 @@
  	<named-query name="getProduitById">
 		<query>select p from Produits as p where p.id = :id</query>	
 	</named-query>
+	
+	
+ 	<named-query name="getArticlesById">
+		<query>select a from Articles as a where a.id = :id</query>	
+	</named-query>
 
+
+	
 	
  	<!-- <named-query name="getProprieteByProduitId">
 		<query>
@@ -92,9 +99,9 @@
 		<table name="prix"/>
 		<attributes>
 			<id name="id"><column name="pri_id"/><generated-value strategy="IDENTITY"/></id>
-			<basic name="prixHtva"><column name="pri_htva"/></basic>
+			<basic name="prixHtva"><column name="pri_htva_euro"/></basic>
 			<basic name="poids"><column name="pri_poids"/></basic>
-			<basic name="vol_conditionnement"><column name="pri_vol_conditionnnement"/></basic>
+			<basic name="vol_conditionnement"><column name="pri_vol_conditionnement"/></basic>
 			<many-to-many name="caracteristiques">
 				<join-table name="combinaisons">
 					<join-column name="com_fk_prix"/>
