@@ -2,6 +2,8 @@ package be.steformations.fs.yaka.jpa.beans;
 
 import java.util.List;
 
+import be.steformations.fs.yaka.jpa.interfaces.Produits;
+
 public class ArticlesImpl {
 
 	
@@ -10,6 +12,7 @@ public class ArticlesImpl {
 	protected int poids;
 	protected int vol_conditionnement;
 	protected List<CaracteristiquesImpl> caracteristiques;
+	protected Produits produit;
 	
 	public int getId() {
 		return id;
@@ -40,6 +43,15 @@ public class ArticlesImpl {
 	}
 	public void setCaracteristiques(List<CaracteristiquesImpl> caracteristiques) {
 		this.caracteristiques = caracteristiques;
+	}
+	public Produits getProduit() {
+		if (produit == null) {
+			produit = caracteristiques.get(0).getProduits();			
+		}
+		return produit;
+	}
+	public void setProduit(ProduitsImpl produit) {
+		this.produit = produit;
 	}
 	
 	

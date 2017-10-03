@@ -23,6 +23,9 @@
 			</li>
 		</c:forEach>
 	</ul>
+	<div class="panier">
+		<a href="${pageContext.request.contextPath}/spring/panier">panier</a>
+	</div>	
 </body>
 </html>    
    

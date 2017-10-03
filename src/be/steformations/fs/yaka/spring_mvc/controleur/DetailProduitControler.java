@@ -3,17 +3,16 @@ package be.steformations.fs.yaka.spring_mvc.controleur;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import be.steformations.fs.yaka.jpa.beans.ArticlesImpl;
-import be.steformations.fs.yaka.jpa.beans.CaracByProprietes;
-import be.steformations.fs.yaka.jpa.beans.CaracteristiquesImpl;
 import be.steformations.fs.yaka.jpa.beans.ProduitsImpl;
 import be.steformations.fs.yaka.jpa.dao.Gestionnaire;
 
 @Controller
+@Scope("request")
 public class DetailProduitControler {
 	
 	@Autowired
@@ -25,12 +24,7 @@ public class DetailProduitControler {
 
 	@RequestMapping("detailProduit")
 	public String showProduitDetail( 
-			@RequestParam("prod") String prod,
-			/*
-			 * @RequestParam("") String ,
-			 */
-			
-			
+			@RequestParam("prod") String prod,			
 			Map<String, Object> attributs
 			){	
 		int idProduit = -1;
@@ -41,21 +35,15 @@ public class DetailProduitControler {
 		}
 		ProduitsImpl produit = gestionnaire.getProduitById(idProduit);
 		attributs.put("produit", produit);
-		
+		/*
 		for (CaracByProprietes car : produit.getCaracByProp()) {
 			for (CaracteristiquesImpl c : car.getCaracteristiques()) {
 				//if(c.getArticles )
 				System.out.println("DetailProduitControler.showProduitDetail()");
-				System.out.println(c.getId());
-				
-				for (ArticlesImpl	a : c.getArticles()) {
-					System.out.println("a.id");
-					System.out.println(a.getId());
-					
-				}
+								
 			}
 		}
-		
+		*/
 		//for each produit.getcarac -> get prop name
 		/*List<ProprietesImpl> propList = gestionnaire.getProprieteByProduitId(idProduit);
 		List<CaracByProprietes> caracByPropList = new ArrayList<>();

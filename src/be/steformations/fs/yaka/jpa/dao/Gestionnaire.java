@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
 import be.steformations.fs.yaka.jpa.beans.ArticlesImpl;
-import be.steformations.fs.yaka.jpa.beans.CaracteristiquesImpl;
 import be.steformations.fs.yaka.jpa.beans.CategoriesImpl;
 import be.steformations.fs.yaka.jpa.beans.ProduitsImpl;
 import be.steformations.fs.yaka.jpa.beans.ProprietesImpl;
@@ -43,9 +42,17 @@ public class Gestionnaire {
 		return this.em.createNamedQuery("getProprieteByProduitId",ProprietesImpl.class).setParameter("id", id).getResultList();
 	}
 	
+	
+	public ArticlesImpl getArticlesIdByCaracteristiquesIdList(List<Integer>id, int count){
+		return this.em.createNamedQuery("getArticlesIdByCaracteristiquesIdList",ArticlesImpl.class).setParameter("id", id).setParameter("count", count).getSingleResult();
+	}
 //	public List<CaracteristiquesImpl> getCaracteristiquesByProduitId(int id){
 //		return this.em.createNamedQuery("getCaracteristiquesByProduitId", CaracteristiquesImpl.class).setParameter("id", id).getResultList();
 //	}
+
+	public ArticlesImpl getArticlesById(int id) {
+		return this.em.createNamedQuery("getArticlesById", ArticlesImpl.class).setParameter("id", id).getSingleResult();
+	}
 	
 
 	

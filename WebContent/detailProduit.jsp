@@ -22,13 +22,19 @@
 		<form action="${pageContext.request.contextPath}/spring/panier/add" method="post">
 			<c:forEach var="prop" items="${p.caracByProp}">
 				<label><c:out value="${prop.proprietes.nom}"/></label>
-				<c:if test="${prop.proprietes.id != 2}">
-					<select name="param">
-						<c:forEach var="v" items="${prop.caracteristiques}">
-							<option  value="${v.id}"><c:out value="${v.valeur}"/></option>					
-						</c:forEach>
-					</select>
-				</c:if>
+				<c:choose>
+					<c:when test="${prop.proprietes.id != 2}">
+						<select name="param">
+							<c:forEach var="v" items="${prop.caracteristiques}">
+								<option  value="${v.id}"><c:out value="${v.valeur}"/></option>					
+							</c:forEach>
+						</select>
+					</c:when>
+					<c:otherwise>
+						<input name="param" type="hidden" value="${prop.caracteristiques[0].id}">
+					</c:otherwise>
+				</c:choose>
+			
 				<br/>
 			</c:forEach>
 			<input type="submit" value="ajouter au panier">

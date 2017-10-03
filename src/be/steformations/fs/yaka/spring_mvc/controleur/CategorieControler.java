@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import be.steformations.fs.yaka.jpa.beans.CategoriesImpl;
 import be.steformations.fs.yaka.jpa.dao.Gestionnaire;
 
 @Controller
+@Scope("request")
 public class CategorieControler {
 
 	@Autowired

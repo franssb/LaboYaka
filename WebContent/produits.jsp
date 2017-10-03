@@ -26,6 +26,9 @@
 				<c:out value="${p.descrCourte}"></c:out>
 			</li>
 		</c:forEach>
-	</ul>
+	</ul>	
+	<div class="panier">
+		<a href="${pageContext.request.contextPath}/spring/panier">panier</a>
+	</div>	
 </body>
 </html>

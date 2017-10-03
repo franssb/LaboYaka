@@ -27,7 +27,24 @@
  	<named-query name="getArticlesById">
 		<query>select a from Articles as a where a.id = :id</query>	
 	</named-query>
-
+	
+	
+	<named-query name="getArticlesIdByCaracteristiquesIdList">
+		<query>
+			select a from Articles as a join a.caracteristiques as c where c.id in :id
+			group by a.id
+			having count(a.id) = :count
+		</query>	
+	</named-query>
+	
+<!-- 	<named-native-query name="getArticlesIdByCaracteristiquesIdList">
+		<query>
+			select  pri_id from prix inner join combinaisons on pri_id = com_fk_prix
+			where com_fk_caracteristiques in ?1
+			group by pri_id
+			having count(pri_id)= ?2
+		</query>
+	</named-native-query> -->
 
 	
 	
@@ -108,6 +125,7 @@
 					<inverse-join-column name="com_fk_caracteristiques"/>
 				</join-table>
 			</many-to-many>
+			<transient name="produit"/>
 		</attributes>	
 	</entity>
 	
