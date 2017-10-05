@@ -38,7 +38,7 @@ public class PanierImpl {
 		System.out.println("PanierImpl.getPrix()");
 		this.prix = 0;
 		for (ArticlesImpl a : articles) {
-			this.prix +=a.getPrixHtva();
+			this.prix +=a.getPrixHtva()*a.getQuantite();
 		}
 		return prix;
 	}

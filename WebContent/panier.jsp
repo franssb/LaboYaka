@@ -15,16 +15,21 @@
 					<c:out value="${c.proprietes.nom}"/>
 					<c:out value="${c.valeur}"></c:out>
 				</c:forEach>
-				<span>prix:</span>
-				<c:out value="${p.prixHtva }"/><span> euros</span>
+				<span>prix unitaire:</span>
+				<c:out value="${p.prixHtva }"/><span> euros</span><br/>
+				<span>quantité:</span>
+				<c:out value="${p.quantite}"></c:out>
 				<form action="${pageContext.request.contextPath}/spring/panier/remove" method="post">
-					<input type="hidden" name="remove" value="${p.id}">
-					<input type="submit" value="retirer">
+					<input type="hidden" name="remove" value="${p.id}"/>
+					<input type="submit" value="retirer"/>
 				</form>
 			</li>
 		</c:forEach>
 	</ul>
 	<span>total:</span>
 	<c:out value="${panier.prix}"></c:out>
+	<form action="${pageContext.request.contextPath}/spring/client" method="post">					
+		<input type="submit" value="achat"/>
+	</form>
 </body>
 </html>

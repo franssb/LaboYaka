@@ -1,12 +1,17 @@
 package be.steformations.fs.yaka.jpa.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
+import com.sun.security.ntlm.Client;
+
 import be.steformations.fs.yaka.jpa.beans.ArticlesImpl;
 import be.steformations.fs.yaka.jpa.beans.CategoriesImpl;
+import be.steformations.fs.yaka.jpa.beans.ClientsImpl;
+import be.steformations.fs.yaka.jpa.beans.PaysImpl;
 import be.steformations.fs.yaka.jpa.beans.ProduitsImpl;
 import be.steformations.fs.yaka.jpa.beans.ProprietesImpl;
 import be.steformations.fs.yaka.jpa.beans.SousCategoriesImpl;
@@ -52,6 +57,38 @@ public class Gestionnaire {
 
 	public ArticlesImpl getArticlesById(int id) {
 		return this.em.createNamedQuery("getArticlesById", ArticlesImpl.class).setParameter("id", id).getSingleResult();
+	}
+
+	public List<PaysImpl> getAllCountry() {
+		return this.em.createNamedQuery("getAllCountry", PaysImpl.class).getResultList();
+		
+	}
+
+	public void addClient(String nom, String prenom, String adresse, String cp, String localite, PaysImpl pays,
+			String telephone, String numeroCarte, Date echeance, String email) {
+		ClientsImpl client = new ClientsImpl();
+		client.setNom(nom);
+		client.setPrenom(prenom);
+		client.setAdresse(adresse);
+		client.setCp(cp);
+		client.setLocalite(localite);
+		client.setPays(pays);
+		client.setTelephone(telephone);
+		client.setNumeroCarte(numeroCarte);
+		client.setEcheance(echeance);
+		client.setEmail(email);
+		if (this.em.isJoinedToTransaction()) {
+			this.em.persist(client);
+		} else {
+			this.em.getTransaction().begin();
+			this.em.persist(client);
+			this.em.getTransaction().commit();
+		}
+	}
+
+	public PaysImpl getCountryById(String paysAbr) {
+		return this.em.createNamedQuery("getCountryById", PaysImpl.class).setParameter("id", paysAbr).getSingleResult();
+		
 	}
 	
 

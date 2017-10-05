@@ -26,6 +26,8 @@
 			
 				<br/>
 			</c:forEach>
+			<label>quantité:</label>
+			<input type="text" name="qtt" value="1"/><br/>
 			<input type="submit" value="ajouter au panier">
 		</form>
 </body>

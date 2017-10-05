@@ -37,6 +37,14 @@
 		</query>	
 	</named-query>
 	
+	<named-query name="getAllCountry">
+		<query>select p from Pays as p</query>
+	</named-query>
+	
+	<named-query name="getCountryById">
+		<query>select p from Pays as p where p.abreviation = :id</query>
+	</named-query>
+	
 <!-- 	<named-native-query name="getArticlesIdByCaracteristiquesIdList">
 		<query>
 			select  pri_id from prix inner join combinaisons on pri_id = com_fk_prix
@@ -126,7 +134,36 @@
 				</join-table>
 			</many-to-many>
 			<transient name="produit"/>
+			<transient name="quantite"/>
 		</attributes>	
+	</entity>
+	
+	<entity class="be.steformations.fs.yaka.jpa.beans.ClientsImpl" name="Client">
+		<table name="clients"/>
+		<attributes>
+			<id name="id"><column name="cli_id"/><generated-value strategy="IDENTITY"/></id>	
+			<basic name="nom"><column name="cli_nom"/></basic>	
+			<basic name="prenom"><column name="cli_prenom"/></basic>	
+			<basic name="adresse"><column name="cli_adresse"/></basic>	
+			<basic name="cp"><column name="cli_cp"/></basic>	
+			<basic name="localite"><column name="cli_localite"/></basic>	
+			<basic name="telephone"><column name="cli_telephone"/></basic>	
+			<basic name="numeroCarte"><column name="cli_numero_carte"/></basic>	
+			<basic name="email"><column name="cli_email"/></basic>	
+			<basic name="echeance"><column name="cli_date_echeance"/><temporal>DATE</temporal></basic>	
+			<many-to-one name="pays">
+				<join-column name="cli_fk_pays"/>
+			</many-to-one>
+		</attributes>
+	</entity>
+	
+	<entity class="be.steformations.fs.yaka.jpa.beans.PaysImpl" name="Pays">
+		<table name="pays"/>
+		<attributes>
+			<id name="abreviation"><column name="pays_abreviation"/></id>
+			<basic name="nom"><column name="pays_nom"/></basic>
+			<basic name="port"><column name="pays_port"/></basic>		
+		</attributes>
 	</entity>
 	
 </entity-mappings>

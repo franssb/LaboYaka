@@ -19,53 +19,48 @@ import be.steformations.fs.yaka.jpa.dao.Gestionnaire;
 @Scope("request")
 public class PanierControler {
 
-	@Autowired	
+	@Autowired
 	protected Gestionnaire gestionnaire;
 	@Autowired
 	protected PanierImpl panier;
-	
+
 	public PanierControler() {
 		System.out.println("PanierControler.PanierControler()");
 	}
-	
+
 	@RequestMapping("panier")
-	public String showPanier( 	
-			Map<String, Object> attributs
-			){
+	public String showPanier(Map<String, Object> attributs) {
 		attributs.put("panier", panier);
 		return "/panier.jsp";
 	}
-	
-	
-	@RequestMapping(value="panier/add",method=RequestMethod.POST )
-	public String addPanier( 				
-			@RequestParam("param") List<String> parametres,
-			Map<String, Object> attributs
-			){
-			if(parametres == null){
-				parametres = new ArrayList<>();
-				parametres.add("2");						
-			}
-			System.out.println("PanierControler.addPanier()");
-			List<Integer>listId = new ArrayList<>();
+
+	@RequestMapping(value = "panier/add", method = RequestMethod.POST)
+	public String addPanier(@RequestParam("param") List<String> parametres, @RequestParam("qtt") String qtt,
+			Map<String, Object> attributs) {
+		if (parametres == null) {
+			parametres = new ArrayList<>();
+			parametres.add("2");
+		}
+		System.out.println("PanierControler.addPanier()");
+		List<Integer> listId = new ArrayList<>();
+		int quant = 0;
+		try {
+			quant = Integer.parseInt(qtt);
 			for (String s : parametres) {
-				try {
-					int id = Integer.parseInt(s);
-					listId.add(id);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				int id = Integer.parseInt(s);
+				listId.add(id);
 			}
-			ArticlesImpl article = this.gestionnaire.getArticlesIdByCaracteristiquesIdList(listId, parametres.size());
-			panier.getArticles().add(article);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ArticlesImpl article = this.gestionnaire.getArticlesIdByCaracteristiquesIdList(listId, parametres.size());
+		article.setQuantite(quant);
+		panier.getArticles().add(article);
 		return this.showPanier(attributs);
 	}
-	
-	@RequestMapping(value="panier/remove",method=RequestMethod.POST)
-	public String removePanier( 				
-			@RequestParam("remove") String remove,
-			Map<String, Object> attributs
-			){
+
+	@RequestMapping(value = "panier/remove", method = RequestMethod.POST)
+	public String removePanier(@RequestParam("remove") String remove, Map<String, Object> attributs) {
 		System.out.println("PanierControler.removePanier()");
 		int id = -1;
 		try {
@@ -77,5 +72,5 @@ public class PanierControler {
 		panier.getArticles().remove(article);
 		return this.showPanier(attributs);
 	}
-	
+
 }

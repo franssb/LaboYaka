@@ -13,6 +13,7 @@ public class ArticlesImpl {
 	protected int vol_conditionnement;
 	protected List<CaracteristiquesImpl> caracteristiques;
 	protected Produits produit;
+	protected int quantite;
 	
 	public int getId() {
 		return id;
@@ -52,6 +53,12 @@ public class ArticlesImpl {
 	}
 	public void setProduit(ProduitsImpl produit) {
 		this.produit = produit;
+	}
+	public int getQuantite() {
+		return quantite;
+	}
+	public void setQuantite(int quantite) {
+		this.quantite = quantite;
 	}
 	
 	
