@@ -50,7 +50,9 @@ public class AdminCategorieControler {
 			@RequestParam("cat") String cat,
 			Map<String, Object> attributs){
 		System.out.println("AdminCategorieControler.add()");
-		this.gestionnaire.createAddCategorie(cat);
+		if(!cat.equals("")){			
+			this.gestionnaire.createAddCategorie(cat);
+		}
 		return this.connection(attributs);
 	}
 	
