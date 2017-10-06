@@ -6,6 +6,7 @@ public class CategoriesImpl implements Categories {
 
 	protected int id;
 	protected String nom;
+	protected int stat;
 	
 
 	@Override
@@ -24,5 +25,13 @@ public class CategoriesImpl implements Categories {
 	
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public int getStat() {
+		return stat;
+	}
+
+	public void setStat(int stat) {
+		this.stat = stat;
 	}
 }

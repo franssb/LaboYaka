@@ -45,6 +45,10 @@
 		<query>select p from Pays as p where p.abreviation = :id</query>
 	</named-query>
 	
+	<named-query name="getCategorieById">
+		<query>select c from Categories as c where c.id = :id</query>
+	</named-query>
+	
 <!-- 	<named-native-query name="getArticlesIdByCaracteristiquesIdList">
 		<query>
 			select  pri_id from prix inner join combinaisons on pri_id = com_fk_prix
@@ -70,6 +74,7 @@
 		<attributes>
 			<id name="id"><column name="cat_id"/><generated-value strategy="IDENTITY"/></id>
 			<basic name="nom"><column name="cat_nom"/></basic>
+			<basic name="stat"><column name="cat_stat"/></basic>
 		</attributes>	
 	</entity>
 	

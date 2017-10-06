@@ -8,7 +8,7 @@
 </head>
 <body>
 <h4>bienvenue boss</h4>
-<a href="${pageContext.request.contextPath}/spring/admin/add">ajouter une categorie</a><br/>
-<a href="${pageContext.request.contextPath}/spring/admin/del">supprimer une categorie</a><br/>
+<a href="${pageContext.request.contextPath}/spring/admin/cat">categorie</a><br/>
+<a href="${pageContext.request.contextPath}/spring/admin/prod">produit</a><br/>
 </body>
 </html>

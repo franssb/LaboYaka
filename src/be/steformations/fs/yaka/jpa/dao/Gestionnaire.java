@@ -114,8 +114,40 @@ public class Gestionnaire {
 			this.em.getTransaction().commit();
 		}
 	}
-	
 
+	public void delCategorie(int id) {
+		CategoriesImpl cat = this.getCategorieById(id);
+		if (cat != null) {
+			if (this.em.isJoinedToTransaction()) {
+				this.em.remove(cat);
+			} else {
+				this.em.getTransaction().begin();
+				this.em.remove(cat);
+				this.em.getTransaction().commit();				
+			}
+		}
+		
+	}
+	
+	private CategoriesImpl getCategorieById(int id){
+		return this.em.createNamedQuery("getCategorieById", CategoriesImpl.class).setParameter("id", id).getSingleResult();
+		
+	}
+
+	public void createAddCategorie(String cat) {
+		System.out.println("Gestionnaire.createAddCategorie()");
+		CategoriesImpl categorie = new CategoriesImpl();
+		categorie.setNom(cat);
+		categorie.setStat(0);
+		if (this.em.isJoinedToTransaction()) {
+			this.em.persist(categorie);
+		} else {
+			this.em.getTransaction().begin();
+			this.em.persist(categorie);
+			this.em.getTransaction().commit();
+		}
+		
+	}
 	
 	
 
