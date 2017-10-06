@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import be.steformations.fs.yaka.jpa.beans.ArticlesImpl;
+import be.steformations.fs.yaka.jpa.beans.ClientsImpl;
+import be.steformations.fs.yaka.jpa.beans.CommandesImpl;
+import be.steformations.fs.yaka.jpa.beans.LignesCommandeImpl;
+import be.steformations.fs.yaka.jpa.beans.PanierImpl;
 import be.steformations.fs.yaka.jpa.beans.PaysImpl;
 import be.steformations.fs.yaka.jpa.dao.Gestionnaire;
 
@@ -21,6 +26,8 @@ public class ClientsControler {
 
 	@Autowired
 	protected Gestionnaire gestionnaire;
+	@Autowired
+	protected PanierImpl panier;
 	
 	public ClientsControler() {
 		System.out.println("ClientsControler.ClientsControler()");
@@ -63,10 +70,22 @@ public class ClientsControler {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		this.gestionnaire.addClient(nom, prenom, adresse, cp, localite, pays, telephone, numeroCarte, date, email );
+		ClientsImpl client = this.gestionnaire.addClient(nom, prenom, adresse, cp, localite, pays, telephone, numeroCarte, date, email );
+		CommandesImpl commande = new CommandesImpl();
+		commande.setClient(client);
+		Date currentDate = new Date();		
+		commande.setDate(currentDate);
+		this.gestionnaire.addCommande(commande);
+		System.out.println(commande.getId());
+		for (ArticlesImpl art : panier.getArticles()) {
+			LignesCommandeImpl lc = new LignesCommandeImpl();
+			lc.setArticle(art);
+			lc.setCommande(commande);
+			lc.setQuantite(art.getQuantite());
+			this.gestionnaire.addLignesCommande(lc);
+		}
 		
-		
-		return "/client.jsp";
+		return "/confirmation.jsp";
 	}
 	
 }

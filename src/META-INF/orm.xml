@@ -166,4 +166,30 @@
 		</attributes>
 	</entity>
 	
+	<entity class="be.steformations.fs.yaka.jpa.beans.CommandesImpl">
+		<table name="commandes"/>
+		<attributes>
+			<id name="id"><column name="com_id"/><generated-value strategy="IDENTITY"/></id>
+			<basic name="date"><column name="com_date"/><temporal>DATE</temporal></basic>
+			<basic name="facture"><column name="com_facture"/></basic>
+			<many-to-one name="client">
+				<join-column name="com_fk_clients"/>
+			</many-to-one>
+		</attributes>
+	</entity>
+	
+	<entity class="be.steformations.fs.yaka.jpa.beans.LignesCommandeImpl">
+		<table name="lignes_commande"/>
+		<attributes>
+			<id name="id"><column name="lig_id"/><generated-value strategy="IDENTITY"/></id>
+			<basic name="quantite"><column name="lig_quantite"/></basic>
+			<many-to-one name="article">
+				<join-column name="lig_fk_prix"/>
+			</many-to-one>
+			<many-to-one name="commande">
+				<join-column name="lig_fk_commandes"/>
+			</many-to-one>
+		</attributes>
+	</entity>
+	
 </entity-mappings>

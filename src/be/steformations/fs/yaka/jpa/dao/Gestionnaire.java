@@ -11,6 +11,8 @@ import com.sun.security.ntlm.Client;
 import be.steformations.fs.yaka.jpa.beans.ArticlesImpl;
 import be.steformations.fs.yaka.jpa.beans.CategoriesImpl;
 import be.steformations.fs.yaka.jpa.beans.ClientsImpl;
+import be.steformations.fs.yaka.jpa.beans.CommandesImpl;
+import be.steformations.fs.yaka.jpa.beans.LignesCommandeImpl;
 import be.steformations.fs.yaka.jpa.beans.PaysImpl;
 import be.steformations.fs.yaka.jpa.beans.ProduitsImpl;
 import be.steformations.fs.yaka.jpa.beans.ProprietesImpl;
@@ -64,7 +66,7 @@ public class Gestionnaire {
 		
 	}
 
-	public void addClient(String nom, String prenom, String adresse, String cp, String localite, PaysImpl pays,
+	public ClientsImpl addClient(String nom, String prenom, String adresse, String cp, String localite, PaysImpl pays,
 			String telephone, String numeroCarte, Date echeance, String email) {
 		ClientsImpl client = new ClientsImpl();
 		client.setNom(nom);
@@ -84,11 +86,33 @@ public class Gestionnaire {
 			this.em.persist(client);
 			this.em.getTransaction().commit();
 		}
+		
+		return client;
 	}
 
 	public PaysImpl getCountryById(String paysAbr) {
 		return this.em.createNamedQuery("getCountryById", PaysImpl.class).setParameter("id", paysAbr).getSingleResult();
 		
+	}
+
+	public void addCommande(CommandesImpl commande) {
+		if (this.em.isJoinedToTransaction()) {
+			this.em.persist(commande);
+		} else {
+			this.em.getTransaction().begin();
+			this.em.persist(commande);
+			this.em.getTransaction().commit();
+		}
+	}
+
+	public void addLignesCommande(LignesCommandeImpl lc) {
+		if (this.em.isJoinedToTransaction()) {
+			this.em.persist(lc);
+		} else {
+			this.em.getTransaction().begin();
+			this.em.persist(lc);
+			this.em.getTransaction().commit();
+		}
 	}
 	
 
