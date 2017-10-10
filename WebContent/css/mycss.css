@@ -14,3 +14,50 @@ a{
 li{
 	list-style-type: none;
 }
+
+.listCategories{
+	padding:0;
+	overflow:hidden;
+	
+}
+.listCategories li{
+	float:left;
+	width:150px;
+	margin:0.5% 1%;
+	padding:0 1%;	
+	background-color:rgba(0,0,0,0.5);
+	text-align: center;
+	
+}
+.listCategories a{	
+	color:rgba(255,255,255,0.8);
+	}
+	
+.listCategories a:hover{	
+	color:rgba(255,255,255,1);
+	}
+body{
+	overflow:hidden;
+}
+.panier{
+	overflow:hidden;
+	float:right;
+	padding:10px;
+}
+.panier a{	
+	color:rgba(0,0,0,0.5);
+}
+.catSsCat{
+	display: none;
+	margin:0px; 
+	padding: 0px; 
+}
+ .listCategories li:hover .catSsCat{
+	display:block;
+}
+ .listCategories li:hover .catSsCat li{
+	float:none;
+}
+.panier a:hover{	
+	color:rgba(0,0,0,0.8);
+}

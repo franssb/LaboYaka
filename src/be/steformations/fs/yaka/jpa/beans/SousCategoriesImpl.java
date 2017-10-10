@@ -7,7 +7,7 @@ public class SousCategoriesImpl implements SousCategories {
 	
 	protected int id;
 	protected String nom;
-	protected int categorie;
+	protected CategoriesImpl categorie;
 	
 	
 	@Override
@@ -21,7 +21,7 @@ public class SousCategoriesImpl implements SousCategories {
 	}
 	
 	@Override
-	public int getCategorie() {
+	public CategoriesImpl getCategorie() {
 		return categorie;
 	}
 	
@@ -33,7 +33,7 @@ public class SousCategoriesImpl implements SousCategories {
 		this.nom = nom;
 	}	
 	
-	public void setCategorie(int categorie) {
+	public void setCategorie(CategoriesImpl categorie) {
 		this.categorie = categorie;
 	}
 }

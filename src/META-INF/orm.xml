@@ -12,7 +12,7 @@
 	</named-query>
 	
  	<named-query name="getAllSousCategoriesByCategories">
-		<query>select s from SousCategories as s where s.categorie = :cat</query>	
+		<query>select s from SousCategories as s where s.categorie.id = :cat</query>	
 	</named-query>
 	
  	<named-query name="getAllProduitsBySousCategories">
@@ -75,6 +75,7 @@
 			<id name="id"><column name="cat_id"/><generated-value strategy="IDENTITY"/></id>
 			<basic name="nom"><column name="cat_nom"/></basic>
 			<basic name="stat"><column name="cat_stat"/></basic>
+			<one-to-many name="souscat" mapped-by="categorie"/>
 		</attributes>	
 	</entity>
 	
@@ -83,7 +84,9 @@
 		<attributes>
 			<id name="id"><column name="sscat_id"/><generated-value strategy="IDENTITY"/></id>
 			<basic name="nom"><column name="sscat_nom"/></basic>
-			<basic name="categorie"><column name="sscat_fk_categories"/></basic>
+			<many-to-one name="categorie">
+				<join-column name="sscat_fk_categories"/>
+			</many-to-one>
 		</attributes>	
 	</entity>
 	

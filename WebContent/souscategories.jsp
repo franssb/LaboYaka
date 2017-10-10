@@ -4,6 +4,7 @@
 
 <jsp:include page="inc/header.jsp"></jsp:include>
 
+
 	<c:set var="souscategories" value="${requestScope['souscategories']}" />
 	<ul>
 		<c:forEach var="scat" items="${requestScope.souscategories}">

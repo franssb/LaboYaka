@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Scope("session")
 public class AdminControler {
 
-	
+	//mdp en dur pour les test, methode a changer
 	@RequestMapping(value="admin", method = RequestMethod.POST )
 	public String connection(
 			@RequestParam("mdp") String mdp

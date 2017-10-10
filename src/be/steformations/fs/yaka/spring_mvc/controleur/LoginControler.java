@@ -14,7 +14,7 @@ public class LoginControler {
 	@Autowired
 	Gestionnaire gestionnaire;
 	
-	
+	//mdp en dur pour test
 	@RequestMapping("login")
 	public String connection(){
 		String retour = "/login.jsp";

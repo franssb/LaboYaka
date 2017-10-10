@@ -1,5 +1,7 @@
 package be.steformations.fs.yaka.jpa.beans;
 
+import java.util.List;
+
 import be.steformations.fs.yaka.jpa.interfaces.Categories;
 
 public class CategoriesImpl implements Categories {
@@ -7,6 +9,7 @@ public class CategoriesImpl implements Categories {
 	protected int id;
 	protected String nom;
 	protected int stat;
+	protected List<SousCategoriesImpl> souscat;
 	
 
 	@Override
@@ -33,5 +36,13 @@ public class CategoriesImpl implements Categories {
 
 	public void setStat(int stat) {
 		this.stat = stat;
+	}
+
+	public List<SousCategoriesImpl> getSouscat() {
+		return souscat;
+	}
+
+	public void setSouscat(List<SousCategoriesImpl> souscat) {
+		this.souscat = souscat;
 	}
 }

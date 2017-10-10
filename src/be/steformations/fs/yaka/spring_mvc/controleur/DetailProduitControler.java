@@ -35,24 +35,7 @@ public class DetailProduitControler {
 		}
 		ProduitsImpl produit = gestionnaire.getProduitById(idProduit);
 		attributs.put("produit", produit);
-		/*
-		for (CaracByProprietes car : produit.getCaracByProp()) {
-			for (CaracteristiquesImpl c : car.getCaracteristiques()) {
-				//if(c.getArticles )
-				System.out.println("DetailProduitControler.showProduitDetail()");
-								
-			}
-		}
-		*/
-		//for each produit.getcarac -> get prop name
-		/*List<ProprietesImpl> propList = gestionnaire.getProprieteByProduitId(idProduit);
-		List<CaracByProprietes> caracByPropList = new ArrayList<>();
-		for (ProprietesImpl prop : propList) {
-			CaracByProprietes cbp = new CaracByProprietes();
-			cbp.setProprietes(prop);
-			caracByPropList.add(cbp);
-		}
-		attributs.put("caracByProprietes", caracByPropList);*/
+	
 		
 		return "/detailProduit.jsp";
 	}
